@@ -1,20 +1,15 @@
-from gql import Client, gql
-from gql import gql
-from gql.transport.aiohttp import AIOHTTPTransport
-
-transport = AIOHTTPTransport(url='https://auth.chat.arnor.dev/graphql')
+from gql import Client
+from gql.transport.requests import RequestsHTTPTransport
+from helper import load_query, GraphQL
+from settings import settings
 
 
 def login(email: str, password: str):
+    transport = RequestsHTTPTransport(url=settings.auth_url)
     client = Client(transport=transport, fetch_schema_from_transport=True)
-    query = gql(
-        """
-        mutation login {
-            login(email: "giga@lul.com", password: "12346") {
-                jwt
-            }
-        }
-        """
-    )
-    result = client.execute(query)
-    print(result)
+
+    with client as session:
+        query = load_query(GraphQL.LOGIN)
+        params = {'email': email, 'password': password}
+        result = session.execute(query, variable_values=params)
+        return result['login']['jwt']

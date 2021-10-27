@@ -9,6 +9,7 @@ authors = ["arnor-nolen <andrey1gorbulin@gmail.com>"]
 python = "^3.9"
 rich = "^10.12.0"
 gql = {version = "3.0.0b0", extras = ["all"]}
+pydantic = {extras = ["dotenv"], version = "^1.8.2"}
 
 [tool.poetry.dev-dependencies]
 pytest = "^5.2"
