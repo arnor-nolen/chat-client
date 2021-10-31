@@ -1,0 +1,7 @@
+mutation sendMessage($user_id: Int!, $text: String!, $channel_id: Int!) {
+  insert_Message_one(
+    object: { userId: $user_id, text: $text, channelId: $channel_id }
+  ) {
+    id
+  }
+}

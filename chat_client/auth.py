@@ -8,8 +8,7 @@ def login(email: str, password: str):
     transport = RequestsHTTPTransport(url=settings.auth_url)
     client = Client(transport=transport, fetch_schema_from_transport=True)
 
-    with client as session:
-        query = load_query(GraphQL.LOGIN)
-        params = {'email': email, 'password': password}
-        result = session.execute(query, variable_values=params)
-        return result['login']['jwt']
+    query = load_query(GraphQL.LOGIN)
+    params = {'email': email, 'password': password}
+    result = client.execute(query, variable_values=params)
+    return result['login']['jwt']

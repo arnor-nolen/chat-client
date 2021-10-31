@@ -1,0 +1,8 @@
+query getMyChannels($user_id: Int!) {
+  UsersOnChannels(where: { userId: { _eq: $user_id } }) {
+    Channel {
+      id
+      name
+    }
+  }
+}

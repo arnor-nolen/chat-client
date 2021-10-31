@@ -1,0 +1,6 @@
+query getAllChannels {
+  Channel {
+    id
+    name
+  }
+}

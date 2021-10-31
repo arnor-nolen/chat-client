@@ -1,0 +1,12 @@
+query getMessages($channel_id: Int!) {
+  Message(where: { channelId: { _eq: $channel_id } }) {
+    User {
+      id
+      email
+    }
+    id
+    text
+    createdAt
+    updatedAt
+  }
+}
